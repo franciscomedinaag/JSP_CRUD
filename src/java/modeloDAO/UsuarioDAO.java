@@ -139,8 +139,23 @@ public class UsuarioDAO implements CRUD{
     }
 
     @Override
-    public Usuario listSucursal(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Sucursal listSucursal(int id) {
+        String sql="select * from sucursal where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                s.setId(rs.getInt("id"));
+                s.setDomicilio(rs.getString("domicilio"));
+                s.setNombre(rs.getString("nombre"));
+                s.setUsuario(rs.getString("usuario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      return s;
     }
 
     @Override
@@ -157,12 +172,27 @@ public class UsuarioDAO implements CRUD{
 
     @Override
     public boolean editSucursal(Sucursal suc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql="update sucursal set nombre='"+suc.getNombre()+"', domicilio='"+suc.getDomicilio()+"', usuario='"+suc.getUsuario()+"' where id="+suc.getId();
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return false;
     }
 
     @Override
     public boolean deleteSucursal(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql="delete from sucursal where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+       
+       return false;
     }
     
 }

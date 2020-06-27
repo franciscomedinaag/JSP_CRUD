@@ -67,8 +67,8 @@
                         <td style="text-align:center;"><%=suc.getDomicilio()%></td>
                         <td style="text-align:center;"><%=suc.getUsuario()%></td>
                         <td style="text-align:center;">
-                            <a class="btn btn-danger" href="Controlador?accion=goToEdit&id=<%=suc.getId()%>">Editar</a>
-                            <a class="btn btn-secondary" href="Controlador?accion=deleteUser&id=<%=suc.getId()%>">Borrar</a>
+                            <a class="btn btn-secondary" href="Controlador?accion=goToEditSucursal&id=<%=suc.getId()%>">Editar</a>
+                            <a class="btn btn-danger" href="Controlador?accion=deleteSucursal&id=<%=suc.getId()%>">Borrar</a>
                         </td>
                     </tr>
                     <%}%>

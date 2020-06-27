@@ -4,6 +4,7 @@
     Author     : xdook
 --%>
 
+<%@page import="modelo.Sucursal"%>
 <%@page import="modelo.Usuario"%>
 <%@page import="modeloDAO.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -11,7 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Usuario</title>
+        <title>Editar Sucursal</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -26,7 +27,7 @@
                         <a class="nav-link" href="Controlador?accion=listarUsuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sucursales</a>
+                        <a class="nav-link" href="Controlador?accion=listarSucursales">Sucursales</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zapatos</a>
@@ -37,24 +38,24 @@
         
         <div class="container text-center">    
             <%
-             UsuarioDAO  userDAO=new UsuarioDAO();
-             int id=Integer.parseInt((String)request.getAttribute("idUser"));
-             Usuario u=(Usuario)userDAO.list(id);
+             UsuarioDAO  dao=new UsuarioDAO();
+             int id=Integer.parseInt((String)request.getAttribute("idSucursal"));
+             Sucursal s=(Sucursal)dao.listSucursal(id);
             %>
-        <h2 class="mt-4 mb-4">Editar usuario</h2>
+        <h2 class="mt-4 mb-4">Editar sucursal</h2>
         <form action="Controlador">
             <!-- formulario va a doGet de controlador, y controlador manda a llamar add en UsuarioDAO para que haga la consulta -->
-            Nombre de usuario:<br>
-            <input class="form-group" type="text" name="txtUsername" value="<%= u.getUsername()%>"><br>
-            Correo electrónico:<br>
-            <input class="form-group" type="text" name="txtEmail" value="<%= u.getEmail()%>"><br>
-            Contraseña:<br>
-            <input class="form-group" type="password" name="txtPassword" value="<%=u.getPassword()%>"><br>
+            Nombre de la sucursal:<br>
+            <input class="form-group" type="text" name="txtNombre" value="<%= s.getNombre()%>"><br>
+            Domicilio:<br>
+            <input class="form-group" type="text" name="txtDomicilio" value="<%= s.getDomicilio()%>"><br>
+            Encargado:<br>
+            <input class="form-group" type="text" name="txtUsuario" value="<%= s.getUsuario()%>"><br>
             
-            <input type="hidden" name="txtId" value="<%=u.getId()%>">
+            <input type="hidden" name="txtId" value="<%=s.getId()%>">
             
-            <input class="btn btn-primary my-3" type="submit" name="accion" value="ActualizarUsuario"><br>
-            <a href="Controlador?accion=listarUsuarios">Regresar</a>
+            <input class="btn btn-primary my-3" type="submit" name="accion" value="ActualizarSucursal"><br>
+            <a href="Controlador?accion=listarSucursales">Regresar</a>
         </form>
         </div>
     </body>

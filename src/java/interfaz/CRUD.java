@@ -21,7 +21,7 @@ public interface CRUD {
     public boolean delete(int id);
     
     public List listarSucursal();
-    public Usuario listSucursal(int id);
+    public Sucursal listSucursal(int id);
     public boolean addSucursal(Sucursal suc);
     public boolean editSucursal(Sucursal suc);
     public boolean deleteSucursal(int id);

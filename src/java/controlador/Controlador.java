@@ -134,6 +134,29 @@ public class Controlador extends HttpServlet {
             dao.addSucursal(s);
             acceso=listarSucursal;
         }  
+        else if(action.equalsIgnoreCase("goToEditSucursal")){
+            request.setAttribute("idSucursal",request.getParameter("id"));
+            acceso=editSucursal;
+        }
+        else if(action.equalsIgnoreCase("ActualizarSucursal")){
+            int id=Integer.parseInt(request.getParameter("txtId"));
+            String nombre=request.getParameter("txtNombre");
+            String domicilio=request.getParameter("txtDomicilio");
+            String usuario=request.getParameter("txtUsuario");
+            s.setId(id);
+            s.setNombre(nombre);
+            s.setDomicilio(domicilio);
+            s.setUsuario(usuario);
+            dao.editSucursal(s);
+            acceso=listarSucursal;
+        } 
+        else if(action.equalsIgnoreCase("deleteSucursal")){
+            int id=Integer.parseInt(request.getParameter("id"));
+            s.setId(id);
+            dao.deleteSucursal(id);
+            acceso=listarSucursal;
+        }
+        
         
         
         RequestDispatcher vista=request.getRequestDispatcher(acceso);//ir a la url de acceso
