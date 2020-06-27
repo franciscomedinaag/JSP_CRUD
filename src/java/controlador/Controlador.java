@@ -130,8 +130,19 @@ public class Controlador extends HttpServlet {
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
+        throws ServletException, IOException {
+
+        String action=request.getParameter("accion");
+        if(action.equalsIgnoreCase("login")){
+            String user = request.getParameter("user");
+            String pass = request.getParameter("pass");
+            if (this.userDAO.login(user, pass)) {
+                System.out.println("Entramos");
+                response.sendRedirect(listarUsuario);
+            } else {
+                response.sendRedirect("index.jsp?status=failed");
+            }
+        }
     }
 
     /**

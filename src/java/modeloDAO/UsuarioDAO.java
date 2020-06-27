@@ -108,4 +108,24 @@ public class UsuarioDAO implements CRUD{
        return false;
     }
     
+    public boolean login(String usuario, String pass) {
+        String sql="select * from usuario where username = ? AND password = ?";
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.setString(1, usuario);
+            ps.setString(2, pass);
+            rs=ps.executeQuery();
+            if(rs.next()) {
+                System.out.println("Hay respuesta");
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+            return false;
+        }
+    }
+    
 }
