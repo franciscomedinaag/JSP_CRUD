@@ -23,10 +23,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="Controlador?accion=listarUsuarios">Usuarios</a>
+                        <a class="nav-link" href="./Controlador?accion=listarUsuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sucursales</a>
+                        <a class="nav-link" href="./Controlador?accion=listarSucursales">Sucursales</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zapatos</a>
@@ -54,7 +54,7 @@
             <input type="hidden" name="txtId" value="<%=u.getId()%>">
             
             <input class="btn btn-primary my-3" type="submit" name="accion" value="ActualizarUsuario"><br>
-            <a href="Controlador?accion=listar">Regresar</a>
+            <a href="Controlador?accion=listarUsuarios">Regresar</a>
         </form>
         </div>
     </body>

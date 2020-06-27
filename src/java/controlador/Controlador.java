@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Sucursal;
 import modelo.Usuario;
 import modeloDAO.UsuarioDAO;
 
@@ -27,7 +28,12 @@ public class Controlador extends HttpServlet {
     String addUsuario="Vistas/agregar.jsp";
     String editUsuario="Vistas/editar.jsp";
     Usuario u= new Usuario();
-    UsuarioDAO userDAO=new UsuarioDAO();
+    UsuarioDAO dao=new UsuarioDAO();
+    
+    String listarSucursal="Vistas/listar_suc.jsp";
+    String addSucursal="Vistas/agregar_suc.jsp";
+    String editSucursal="Vistas/editar_suc.jsp";
+    Sucursal s=new Sucursal();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -70,11 +76,11 @@ public class Controlador extends HttpServlet {
         //processRequest(request, response);
         String acceso="";
         String action=request.getParameter("accion");
+        
+        
         if(action.equalsIgnoreCase("listarUsuarios")){
             acceso=listarUsuario;
-        }
-        
-        
+        }       
         else if(action.equalsIgnoreCase("goToAdd")){
             acceso=addUsuario;
         }
@@ -85,11 +91,9 @@ public class Controlador extends HttpServlet {
             u.setUsername(username);
             u.setEmail(email);
             u.setPassword(password);
-            userDAO.add(u);
+            dao.add(u);
             acceso=listarUsuario;
-        }
-        
-        
+        }   
         else if(action.equalsIgnoreCase("goToEdit")){
             request.setAttribute("idUser",request.getParameter("id"));
             acceso=editUsuario;
@@ -103,17 +107,56 @@ public class Controlador extends HttpServlet {
             u.setUsername(username);
             u.setEmail(email);
             u.setPassword(password);
-            userDAO.edit(u);
+            dao.edit(u);
             acceso=listarUsuario;
-        }
-        
-        
+        }   
         else if(action.equalsIgnoreCase("deleteUser")){
             int id=Integer.parseInt(request.getParameter("id"));
             u.setId(id);
-            userDAO.delete(id);
+            dao.delete(id);
             acceso=listarUsuario;
         }
+        
+        
+        else if(action.equalsIgnoreCase("listarSucursales")){
+            acceso=listarSucursal;
+        }
+        else if(action.equalsIgnoreCase("goToAddSucursal")){
+            acceso=addSucursal;
+        }
+        else if(action.equalsIgnoreCase("AgregarSucursal")){
+            String nombre=request.getParameter("txtNombre");
+            String domicilio=request.getParameter("txtDomicilio");
+            String usuario=request.getParameter("txtUsuario");
+            s.setNombre(nombre);
+            s.setDomicilio(domicilio);
+            s.setUsuario(usuario);
+            dao.addSucursal(s);
+            acceso=listarSucursal;
+        }  
+        else if(action.equalsIgnoreCase("goToEditSucursal")){
+            request.setAttribute("idSucursal",request.getParameter("id"));
+            acceso=editSucursal;
+        }
+        else if(action.equalsIgnoreCase("ActualizarSucursal")){
+            int id=Integer.parseInt(request.getParameter("txtId"));
+            String nombre=request.getParameter("txtNombre");
+            String domicilio=request.getParameter("txtDomicilio");
+            String usuario=request.getParameter("txtUsuario");
+            s.setId(id);
+            s.setNombre(nombre);
+            s.setDomicilio(domicilio);
+            s.setUsuario(usuario);
+            dao.editSucursal(s);
+            acceso=listarSucursal;
+        } 
+        else if(action.equalsIgnoreCase("deleteSucursal")){
+            int id=Integer.parseInt(request.getParameter("id"));
+            s.setId(id);
+            dao.deleteSucursal(id);
+            acceso=listarSucursal;
+        }
+        
         
         
         RequestDispatcher vista=request.getRequestDispatcher(acceso);//ir a la url de acceso
@@ -136,7 +179,7 @@ public class Controlador extends HttpServlet {
         if(action.equalsIgnoreCase("login")){
             String user = request.getParameter("user");
             String pass = request.getParameter("pass");
-            if (this.userDAO.login(user, pass)) {
+            if (this.dao.login(user, pass)) {
                 System.out.println("Entramos");
                 response.sendRedirect(listarUsuario);
             } else {

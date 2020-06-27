@@ -25,10 +25,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="Controlador?accion=listarUsuarios">Usuarios</a>
+                        <a class="nav-link" href="./Controlador?accion=listarUsuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sucursales</a>
+                        <a class="nav-link" href="./Controlador?accion=listarSucursales">Sucursales</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zapatos</a>
@@ -64,8 +64,8 @@
                         <td style="text-align:center;"><%=user.getUsername()%></td>
                         <td style="text-align:center;"><%=user.getEmail()%></td>
                         <td style="text-align:center;">
-                            <a class="btn btn-danger" href="Controlador?accion=goToEdit&id=<%=user.getId()%>">Editar</a>
-                            <a class="btn btn-secondary" href="Controlador?accion=deleteUser&id=<%=user.getId()%>">Borrar</a>
+                            <a class="btn btn-secondary" href="Controlador?accion=goToEdit&id=<%=user.getId()%>">Editar</a>
+                            <a class="btn btn-danger" href="Controlador?accion=deleteUser&id=<%=user.getId()%>">Borrar</a>
                         </td>
                     </tr>
                     <%}%>

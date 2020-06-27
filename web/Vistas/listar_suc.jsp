@@ -4,6 +4,7 @@
     Author     : xdook
 --%>
 
+<%@page import="modelo.Sucursal"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
 <%@page import="modelo.Usuario"%>
@@ -13,7 +14,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar</title>
+        <title>Listar Sucursal</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body style="background-color: #cccccc">
@@ -38,34 +39,36 @@
         </nav>
         <div style="background-color: white; min-height: 100vh;" class="container">
             
-            <a class="btn btn-primary mb-3 mr-5 mt-3" style="float:right; width: 300px" href="Controlador?accion=goToAdd">Agregar Nuevo</a> 
+            <a class="btn btn-primary mb-3 mr-5 mt-3" style="float:right; width: 300px" href="Controlador?accion=goToAddSucursal">Agregar Sucursal</a> 
              <!--  va a doGet de controlador Y te lleva al formulario -->
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th style="text-align:center;">ID</th>
                         <th style="text-align:center;">Nombre</th>
-                        <th style="text-align:center;">Email</th>
+                        <th style="text-align:center;">Domicilio</th>
+                        <th style="text-align:center;">Encargado</th>
                         <th style="text-align:center;">Acciones</th>
                     </tr>
                 </thead>
                 <%
                     UsuarioDAO dao=new UsuarioDAO();
-                    List<Usuario>list=dao.listar();
-                    Iterator<Usuario>iter=list.iterator();
-                    Usuario user=null;
+                    List<Sucursal>list=dao.listarSucursal();
+                    Iterator<Sucursal>iter=list.iterator();
+                    Sucursal suc=null;
                     while(iter.hasNext()){
-                        user=iter.next();
+                        suc=iter.next();
                     
                 %>
                 <tbody>
                     <tr> 
-                        <td style="text-align:center;"><%=user.getId()%></td>
-                        <td style="text-align:center;"><%=user.getUsername()%></td>
-                        <td style="text-align:center;"><%=user.getEmail()%></td>
+                        <td style="text-align:center;"><%=suc.getId()%></td>
+                        <td style="text-align:center;"><%=suc.getNombre()%></td>
+                        <td style="text-align:center;"><%=suc.getDomicilio()%></td>
+                        <td style="text-align:center;"><%=suc.getUsuario()%></td>
                         <td style="text-align:center;">
-                            <a class="btn btn-secondary" href="Controlador?accion=goToEdit&id=<%=user.getId()%>">Editar</a>
-                            <a class="btn btn-danger" href="Controlador?accion=deleteUser&id=<%=user.getId()%>">Borrar</a>
+                            <a class="btn btn-secondary" href="Controlador?accion=goToEditSucursal&id=<%=suc.getId()%>">Editar</a>
+                            <a class="btn btn-danger" href="Controlador?accion=deleteSucursal&id=<%=suc.getId()%>">Borrar</a>
                         </td>
                     </tr>
                     <%}%>

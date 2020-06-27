@@ -6,6 +6,7 @@
 package interfaz;
 
 import java.util.List;
+import modelo.Sucursal;
 import modelo.Usuario;
 
 /**
@@ -18,4 +19,10 @@ public interface CRUD {
     public boolean add(Usuario per);
     public boolean edit(Usuario per);
     public boolean delete(int id);
+    
+    public List listarSucursal();
+    public Sucursal listSucursal(int id);
+    public boolean addSucursal(Sucursal suc);
+    public boolean editSucursal(Sucursal suc);
+    public boolean deleteSucursal(int id);
 }
