@@ -54,7 +54,7 @@
             <input type="hidden" name="txtId" value="<%=u.getId()%>">
             
             <input class="btn btn-primary my-3" type="submit" name="accion" value="ActualizarUsuario"><br>
-            <a href="Controlador?accion=listar">Regresar</a>
+            <a href="Controlador?accion=listarUsuarios">Regresar</a>
         </form>
         </div>
     </body>
