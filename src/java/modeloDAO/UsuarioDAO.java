@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Sucursal;
 import modelo.Usuario;
 
 /**
@@ -28,6 +29,7 @@ public class UsuarioDAO implements CRUD{
     PreparedStatement ps;
     ResultSet rs;
     Usuario u=new Usuario();
+    Sucursal s=new Sucursal();
     
     @Override
     public List listar() {
@@ -51,7 +53,7 @@ public class UsuarioDAO implements CRUD{
         
       return list;
     }
-
+    
     @Override
     public Usuario list(int id) {
        String sql="select * from usuario where id="+id;
@@ -126,6 +128,87 @@ public class UsuarioDAO implements CRUD{
             Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
+    }
+
+    @Override
+    public List listarSucursal() {
+        ArrayList<Sucursal>list=new ArrayList();
+        String sql="select * from sucursal";
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Sucursal suc= new Sucursal();
+                suc.setId(rs.getInt("id"));
+                suc.setDomicilio(rs.getString("domicilio"));
+                suc.setNombre(rs.getString("nombre"));
+                suc.setUsuario(rs.getString("usuario"));
+                list.add(suc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return list;
+    }
+
+    @Override
+    public Sucursal listSucursal(int id) {
+        String sql="select * from sucursal where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                s.setId(rs.getInt("id"));
+                s.setDomicilio(rs.getString("domicilio"));
+                s.setNombre(rs.getString("nombre"));
+                s.setUsuario(rs.getString("usuario"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      return s;
+    }
+
+    @Override
+    public boolean addSucursal(Sucursal suc) {
+       String sql="insert into sucursal (nombre, domicilio, usuario) values ('"+suc.getNombre()+"','"+suc.getDomicilio()+"','"+suc.getUsuario()+"')";
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+       return false;
+    }
+
+    @Override
+    public boolean editSucursal(Sucursal suc) {
+        String sql="update sucursal set nombre='"+suc.getNombre()+"', domicilio='"+suc.getDomicilio()+"', usuario='"+suc.getUsuario()+"' where id="+suc.getId();
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deleteSucursal(int id) {
+       String sql="delete from sucursal where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+       
+       return false;
     }
     
 }
