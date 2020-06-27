@@ -47,7 +47,7 @@
                         <th style="text-align:center;">ID</th>
                         <th style="text-align:center;">Nombre</th>
                         <th style="text-align:center;">Domicilio</th>
-                        <th style="text-align:center;">Usuario</th>
+                        <th style="text-align:center;">Encargado</th>
                         <th style="text-align:center;">Acciones</th>
                     </tr>
                 </thead>

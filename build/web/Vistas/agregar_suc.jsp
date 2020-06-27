@@ -36,12 +36,13 @@
             <h2 class="mt-4 mb-4">Agregar Sucursal</h2>
             <form action="Controlador">
             <!-- formulario va a doGet de controlador, y controlador manda a llamar add en UsuarioDAO para que haga la consulta -->
-            Nombre de usuario:<br>
-            <input type="text" name="txtUsername"><br>
-            Correo electrónico:<br>
-            <input type="text" name="txtEmail"><br>
-            Contraseña:<br>
-            <input type="password" name="txtPassword"><br>
+            Nombre de sucursal:<br>
+            <input type="text" name="txtNombre"><br>
+            Domicilio:<br>
+            <input type="text" name="txtDomicilio"><br>
+            Encargado:<br>
+            <input type="text" name="txtUsuario"><br>
+            
             <input class="btn btn-primary my-3" type="submit" name="accion" value="AgregarSucursal"><br>
             <a href="Controlador?accion=listarSucursales">Regresar</a>
             </form>

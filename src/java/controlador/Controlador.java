@@ -13,6 +13,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import modelo.Sucursal;
 import modelo.Usuario;
 import modeloDAO.UsuarioDAO;
 
@@ -27,11 +28,12 @@ public class Controlador extends HttpServlet {
     String addUsuario="Vistas/agregar.jsp";
     String editUsuario="Vistas/editar.jsp";
     Usuario u= new Usuario();
-    UsuarioDAO userDAO=new UsuarioDAO();
+    UsuarioDAO dao=new UsuarioDAO();
     
     String listarSucursal="Vistas/listar_suc.jsp";
     String addSucursal="Vistas/agregar_suc.jsp";
     String editSucursal="Vistas/editar_suc.jsp";
+    Sucursal s=new Sucursal();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -89,7 +91,7 @@ public class Controlador extends HttpServlet {
             u.setUsername(username);
             u.setEmail(email);
             u.setPassword(password);
-            userDAO.add(u);
+            dao.add(u);
             acceso=listarUsuario;
         }   
         else if(action.equalsIgnoreCase("goToEdit")){
@@ -105,13 +107,13 @@ public class Controlador extends HttpServlet {
             u.setUsername(username);
             u.setEmail(email);
             u.setPassword(password);
-            userDAO.edit(u);
+            dao.edit(u);
             acceso=listarUsuario;
         }   
         else if(action.equalsIgnoreCase("deleteUser")){
             int id=Integer.parseInt(request.getParameter("id"));
             u.setId(id);
-            userDAO.delete(id);
+            dao.delete(id);
             acceso=listarUsuario;
         }
         
@@ -123,14 +125,14 @@ public class Controlador extends HttpServlet {
             acceso=addSucursal;
         }
         else if(action.equalsIgnoreCase("AgregarSucursal")){
-            /*String username=request.getParameter("txtUsername");
-            String email=request.getParameter("txtEmail");
-            String password=request.getParameter("txtPassword");
-            u.setUsername(username);
-            u.setEmail(email);
-            u.setPassword(password);
-            userDAO.add(u);
-            acceso=listarUsuario;*/
+            String nombre=request.getParameter("txtNombre");
+            String domicilio=request.getParameter("txtDomicilio");
+            String usuario=request.getParameter("txtUsuario");
+            s.setNombre(nombre);
+            s.setDomicilio(domicilio);
+            s.setUsuario(usuario);
+            dao.addSucursal(s);
+            acceso=listarSucursal;
         }  
         
         

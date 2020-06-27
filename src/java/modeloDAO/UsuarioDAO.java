@@ -145,7 +145,14 @@ public class UsuarioDAO implements CRUD{
 
     @Override
     public boolean addSucursal(Sucursal suc) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       String sql="insert into sucursal (nombre, domicilio, usuario) values ('"+suc.getNombre()+"','"+suc.getDomicilio()+"','"+suc.getUsuario()+"')";
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+       return false;
     }
 
     @Override
