@@ -1,17 +1,15 @@
 <%-- 
-    Document   : editar
-    Created on : 24/06/2020, 12:50:38 PM
+    Document   : agregar
+    Created on : 24/06/2020, 12:50:23 PM
     Author     : xdook
 --%>
 
-<%@page import="modelo.Usuario"%>
-<%@page import="modeloDAO.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Editar Usuario</title>
+        <title>Agregar Sucursal</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -34,28 +32,20 @@
                 </ul>
              </div>
         </nav>
-        
-        <div class="container text-center">    
-            <%
-             UsuarioDAO  userDAO=new UsuarioDAO();
-             int id=Integer.parseInt((String)request.getAttribute("idUser"));
-             Usuario u=(Usuario)userDAO.list(id);
-            %>
-        <h2 class="mt-4 mb-4">Editar usuario</h2>
-        <form action="Controlador">
+        <div class="container text-center">
+            <h2 class="mt-4 mb-4">Agregar Sucursal</h2>
+            <form action="Controlador">
             <!-- formulario va a doGet de controlador, y controlador manda a llamar add en UsuarioDAO para que haga la consulta -->
             Nombre de usuario:<br>
-            <input class="form-group" type="text" name="txtUsername" value="<%= u.getUsername()%>"><br>
+            <input type="text" name="txtUsername"><br>
             Correo electrónico:<br>
-            <input class="form-group" type="text" name="txtEmail" value="<%= u.getEmail()%>"><br>
+            <input type="text" name="txtEmail"><br>
             Contraseña:<br>
-            <input class="form-group" type="password" name="txtPassword" value="<%=u.getPassword()%>"><br>
-            
-            <input type="hidden" name="txtId" value="<%=u.getId()%>">
-            
-            <input class="btn btn-primary my-3" type="submit" name="accion" value="ActualizarUsuario"><br>
-            <a href="Controlador?accion=listarUsuarios">Regresar</a>
-        </form>
+            <input type="password" name="txtPassword"><br>
+            <input class="btn btn-primary my-3" type="submit" name="accion" value="AgregarSucursal"><br>
+            <a href="Controlador?accion=listarSucursales">Regresar</a>
+            </form>
         </div>
+        
     </body>
 </html>

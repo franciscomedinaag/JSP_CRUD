@@ -15,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import modelo.Sucursal;
 import modelo.Usuario;
 
 /**
@@ -28,7 +29,9 @@ public class UsuarioDAO implements CRUD{
     PreparedStatement ps;
     ResultSet rs;
     Usuario u=new Usuario();
+    Sucursal s=new Sucursal();
     
+//////////////////////////////////////// Modelo  Usuario //////////////////////////////////////////////////////////////////
     @Override
     public List listar() {
         ArrayList<Usuario>list=new ArrayList();
@@ -51,6 +54,7 @@ public class UsuarioDAO implements CRUD{
         
       return list;
     }
+    
 
     @Override
     public Usuario list(int id) {
@@ -106,6 +110,52 @@ public class UsuarioDAO implements CRUD{
         }
        
        return false;
+    }
+    
+    ////////////////////////////////////////////// Modelo Sucursal //////////////////////////////////////////////////////////
+
+    @Override
+    public List listarSucursal() {
+        ArrayList<Sucursal>list=new ArrayList();
+        String sql="select * from sucursal";
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Sucursal suc= new Sucursal();
+                suc.setId(rs.getInt("id"));
+                suc.setDomicilio(rs.getString("domicilio"));
+                suc.setNombre(rs.getString("nombre"));
+                suc.setUsuario(rs.getString("usuario"));
+                list.add(suc);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+      return list;
+    }
+
+    @Override
+    public Usuario listSucursal(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean addSucursal(Sucursal suc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean editSucursal(Sucursal suc) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean deleteSucursal(int id) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

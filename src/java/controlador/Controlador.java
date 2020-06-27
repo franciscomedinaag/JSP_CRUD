@@ -29,6 +29,10 @@ public class Controlador extends HttpServlet {
     Usuario u= new Usuario();
     UsuarioDAO userDAO=new UsuarioDAO();
     
+    String listarSucursal="Vistas/listar_suc.jsp";
+    String addSucursal="Vistas/agregar_suc.jsp";
+    String editSucursal="Vistas/editar_suc.jsp";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -70,11 +74,11 @@ public class Controlador extends HttpServlet {
         //processRequest(request, response);
         String acceso="";
         String action=request.getParameter("accion");
+        
+        
         if(action.equalsIgnoreCase("listarUsuarios")){
             acceso=listarUsuario;
-        }
-        
-        
+        }       
         else if(action.equalsIgnoreCase("goToAdd")){
             acceso=addUsuario;
         }
@@ -87,9 +91,7 @@ public class Controlador extends HttpServlet {
             u.setPassword(password);
             userDAO.add(u);
             acceso=listarUsuario;
-        }
-        
-        
+        }   
         else if(action.equalsIgnoreCase("goToEdit")){
             request.setAttribute("idUser",request.getParameter("id"));
             acceso=editUsuario;
@@ -105,15 +107,31 @@ public class Controlador extends HttpServlet {
             u.setPassword(password);
             userDAO.edit(u);
             acceso=listarUsuario;
-        }
-        
-        
+        }   
         else if(action.equalsIgnoreCase("deleteUser")){
             int id=Integer.parseInt(request.getParameter("id"));
             u.setId(id);
             userDAO.delete(id);
             acceso=listarUsuario;
         }
+        
+        
+        else if(action.equalsIgnoreCase("listarSucursales")){
+            acceso=listarSucursal;
+        }
+        else if(action.equalsIgnoreCase("goToAddSucursal")){
+            acceso=addSucursal;
+        }
+        else if(action.equalsIgnoreCase("AgregarSucursal")){
+            /*String username=request.getParameter("txtUsername");
+            String email=request.getParameter("txtEmail");
+            String password=request.getParameter("txtPassword");
+            u.setUsername(username);
+            u.setEmail(email);
+            u.setPassword(password);
+            userDAO.add(u);
+            acceso=listarUsuario;*/
+        }  
         
         
         RequestDispatcher vista=request.getRequestDispatcher(acceso);//ir a la url de acceso

@@ -28,7 +28,7 @@
                         <a class="nav-link" href="Controlador?accion=listarUsuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Sucursales</a>
+                        <a class="nav-link" href="Controlador?accion=listarSucursales">Sucursales</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zapatos</a>
