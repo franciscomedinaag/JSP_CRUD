@@ -115,7 +115,6 @@ public class UsuarioDAO implements CRUD{
        return false;
     }
     
-<<<<<<< HEAD
     public boolean login(String usuario, String pass) {
         String sql="select * from usuario where username = ? AND password = ?";
         try {
@@ -135,9 +134,6 @@ public class UsuarioDAO implements CRUD{
             return false;
         }
     }
-=======
-    ////////////////////////////////////////////// Modelo Sucursal //////////////////////////////////////////////////////////
->>>>>>> 41bd2e973045653646e015d62998c3a360c0c834
 
     @Override
     public List listarSucursal() {

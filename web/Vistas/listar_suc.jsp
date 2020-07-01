@@ -26,17 +26,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-<<<<<<< HEAD
                         <a class="nav-link" href="./Controlador?accion=listarUsuarios">Usuarios</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="./Controlador?accion=listarSucursales">Sucursales</a>
-=======
-                        <a class="nav-link" href="Controlador?accion=listarUsuarios">Usuarios</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Controlador?accion=listarSucursales">Sucursales</a>
->>>>>>> 41bd2e973045653646e015d62998c3a360c0c834
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">Zapatos</a>
