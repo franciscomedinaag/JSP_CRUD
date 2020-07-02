@@ -1,21 +1,20 @@
 <%-- 
-    Document   : listar
-    Created on : 24/06/2020, 12:50:07 PM
-    Author     : xdook
+    Document   : listar_zap
+    Created on : 1/07/2020, 02:20:00 PM
+    Author     : pabca
 --%>
 
-<%@page import="modelo.Sucursal"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.List"%>
-<%@page import="modelo.Usuario"%>
+<%@page import="modelo.Zapato"%>
 <%@page import="modeloDAO.UsuarioDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Listar Sucursal</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Listar Zapatos</title>
     </head>
     <body style="background-color: #cccccc">
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -39,36 +38,37 @@
         </nav>
         <div style="background-color: white; min-height: 100vh;" class="container">
             
-            <a class="btn btn-primary mb-3 mr-5 mt-3" style="float:right; width: 300px" href="Controlador?accion=goToAddSucursal">Agregar Sucursal</a> 
+            <a class="btn btn-primary mb-3 mr-5 mt-3" style="float:right; width: 300px" href="Controlador?accion=goToAddZapato">Agregar Zapato</a> 
              <!--  va a doGet de controlador Y te lleva al formulario -->
             <table class="table table-hover">
                 <thead class="thead-dark">
                     <tr>
                         <th style="text-align:center;">ID</th>
-                        <th style="text-align:center;">Nombre</th>
-                        <th style="text-align:center;">Domicilio</th>
-                        <th style="text-align:center;">Encargado</th>
+                        <th style="text-align:center;">Modelo</th>
+                        <th style="text-align:center;">Talla</th>
+                        <th style="text-align:center;">Precio</th>
+                        <th style="text-align:center;">Sucursal</th>
                         <th style="text-align:center;">Acciones</th>
                     </tr>
                 </thead>
                 <%
                     UsuarioDAO dao=new UsuarioDAO();
-                    List<Sucursal>list=dao.listarSucursal();
-                    Iterator<Sucursal>iter=list.iterator();
-                    Sucursal suc=null;
+                    List<Zapato>list=dao.listarZapatos();
+                    Iterator<Zapato>iter=list.iterator();
+                    Zapato zap=null;
                     while(iter.hasNext()){
-                        suc=iter.next();
-                    
+                        zap=iter.next();
                 %>
                 <tbody>
                     <tr> 
-                        <td style="text-align:center;"><%=suc.getId()%></td>
-                        <td style="text-align:center;"><%=suc.getNombre()%></td>
-                        <td style="text-align:center;"><%=suc.getDomicilio()%></td>
-                        <td style="text-align:center;"><%=suc.getUsuario()%></td>
+                        <td style="text-align:center;"><%=zap.getId()%></td>
+                        <td style="text-align:center;"><%=zap.getModelo()%></td>
+                        <td style="text-align:center;"><%=zap.getTalla()%></td>
+                        <td style="text-align:center;"><%=zap.getPrecio()%></td>
+                        <td style="text-align:center;"><%=zap.getSucursal()%></td>
                         <td style="text-align:center;">
-                            <a class="btn btn-secondary" href="Controlador?accion=goToEditSucursal&id=<%=suc.getId()%>">Editar</a>
-                            <a class="btn btn-danger" href="Controlador?accion=deleteSucursal&id=<%=suc.getId()%>">Borrar</a>
+                            <a class="btn btn-secondary" href="Controlador?accion=goToEditZapato&id=<%=zap.getId()%>">Editar</a>
+                            <a class="btn btn-danger" href="Controlador?accion=deleteZapato&id=<%=zap.getId()%>">Borrar</a>
                         </td>
                     </tr>
                     <%}%>

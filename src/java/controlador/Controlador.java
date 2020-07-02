@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import modelo.Sucursal;
 import modelo.Usuario;
+import modelo.Zapato;
 import modeloDAO.UsuarioDAO;
 
 /**
@@ -34,6 +35,11 @@ public class Controlador extends HttpServlet {
     String addSucursal="Vistas/agregar_suc.jsp";
     String editSucursal="Vistas/editar_suc.jsp";
     Sucursal s=new Sucursal();
+    
+    String listarZapatos="Vistas/listar_zap.jsp";
+    String addZapato="Vistas/agregar_zap.jsp";
+    String editZapato="Vistas/editar_zap.jsp";
+    Zapato z = new Zapato();
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -156,8 +162,48 @@ public class Controlador extends HttpServlet {
             dao.deleteSucursal(id);
             acceso=listarSucursal;
         }
-        
-        
+        else if (action.equalsIgnoreCase("AgregarZapato")){
+            String modelo=request.getParameter("txtModelo");
+            int talla =Integer.parseInt(request.getParameter("numTalla"));
+            int precio =Integer.parseInt(request.getParameter("numPrecio"));
+            String sucursal=request.getParameter("txtSucursal");
+            
+            z.setModelo(modelo);
+            z.setTalla(talla);
+            z.setPrecio(precio);
+            z.setSucursal(sucursal);
+            dao.addZapato(z);
+            acceso=listarZapatos;
+        }
+        else if(action.equalsIgnoreCase("listarZapatos")){
+            acceso=listarZapatos;
+        } 
+        else if( action.equalsIgnoreCase("goToEditZapato")){
+            request.setAttribute("idZapato",request.getParameter("id"));
+            acceso=editZapato;
+        }
+        else if(action.equalsIgnoreCase("deleteZapato")){
+            int id=Integer.parseInt(request.getParameter("id"));
+            z.setId(id);
+            dao.deleteZapato(id);
+            acceso=listarZapatos;
+        }
+        else if(action.equalsIgnoreCase("ActualizarZapato")){
+            int id=Integer.parseInt(request.getParameter("txtId"));
+            String modelo=request.getParameter("txtModelo");
+            int talla=Integer.parseInt(request.getParameter("numTalla"));
+            int precio=Integer.parseInt(request.getParameter("numPrecio"));
+            String sucursal=request.getParameter("txtSucursal");
+            z.setId(id);
+            z.setModelo(modelo);
+            z.setTalla(talla);
+            z.setPrecio(precio);
+            z.setSucursal(sucursal);
+            dao.editZapato(z);
+            acceso=listarZapatos;
+        } else if(action.equalsIgnoreCase("goToAddZapato")){
+            acceso=addZapato;
+        }
         
         RequestDispatcher vista=request.getRequestDispatcher(acceso);//ir a la url de acceso
         vista.forward(request, response);
@@ -181,7 +227,8 @@ public class Controlador extends HttpServlet {
             String pass = request.getParameter("pass");
             if (this.dao.login(user, pass)) {
                 System.out.println("Entramos");
-                response.sendRedirect(listarUsuario);
+                RequestDispatcher vista=request.getRequestDispatcher(listarUsuario);
+                vista.forward(request, response);
             } else {
                 response.sendRedirect("index.jsp?status=failed");
             }

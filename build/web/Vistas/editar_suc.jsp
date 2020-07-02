@@ -30,7 +30,7 @@
                         <a class="nav-link" href="./Controlador?accion=listarSucursales">Sucursales</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Zapatos</a>
+                        <a class="nav-link" href="./Controlador?accion=listarZapatos">Zapatos</a>
                     </li> 
                 </ul>
              </div>

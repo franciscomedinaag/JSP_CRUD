@@ -1,7 +1,7 @@
 <%-- 
-    Document   : agregar
-    Created on : 24/06/2020, 12:50:23 PM
-    Author     : xdook
+    Document   : agregar_zap
+    Created on : 1/07/2020, 01:42:19 PM
+    Author     : pabca
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,8 +9,8 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Agregar Sucursal</title>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <title>Agregar Zapato</title>
     </head>
     <body>
         <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -34,19 +34,22 @@
         </nav>
         <div class="container text-center">
             <h2 class="mt-4 mb-4">Agregar Sucursal</h2>
-            <form action="Controlador">
+            <form action="Controlador" method="GET">
             <!-- formulario va a doGet de controlador, y controlador manda a llamar add en UsuarioDAO para que haga la consulta -->
-            Nombre de sucursal:<br>
-            <input type="text" name="txtNombre"><br>
-            Domicilio:<br>
-            <input type="text" name="txtDomicilio"><br>
-            Encargado:<br>
-            <input type="text" name="txtUsuario"><br>
+            Modelo:<br>
+            <input type="text" name="txtModelo"><br>
+            Talla:<br>
+            <input type="number" name="numTalla"><br>
+            Precio:<br>
+            <input type="number" name="numPrecio"><br>
+            Sucursal:<br>
+            <input type="text" name="txtSucursal"><br>
             
-            <input class="btn btn-primary my-3" type="submit" name="accion" value="AgregarSucursal"><br>
-            <a href="Controlador?accion=listarSucursales">Regresar</a>
+            <button class="btn btn-primary my-3" type="submit" name="accion" value="AgregarZapato">Agregar</button><br>
+            <a href="Controlador?accion=listarZapatos">Regresar</a>
             </form>
         </div>
         
     </body>
 </html>
+

@@ -17,6 +17,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Sucursal;
 import modelo.Usuario;
+import modelo.Zapato;
 
 /**
  *
@@ -30,6 +31,7 @@ public class UsuarioDAO implements CRUD{
     ResultSet rs;
     Usuario u=new Usuario();
     Sucursal s=new Sucursal();
+    Zapato z=new Zapato();
     
 //////////////////////////////////////// Modelo  Usuario //////////////////////////////////////////////////////////////////
     @Override
@@ -55,10 +57,6 @@ public class UsuarioDAO implements CRUD{
       return list;
     }
     
-<<<<<<< HEAD
-=======
-
->>>>>>> 41bd2e973045653646e015d62998c3a360c0c834
     @Override
     public Usuario list(int id) {
        String sql="select * from usuario where id="+id;
@@ -216,4 +214,85 @@ public class UsuarioDAO implements CRUD{
        return false;
     }
     
+    @Override
+    public List listarZapatos() {
+        ArrayList<Zapato>list=new ArrayList();
+        String sql="select * from zapatos";
+        
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                Zapato zap= new Zapato();
+                zap.setId(rs.getInt("id"));
+                zap.setModelo(rs.getString("modelo"));
+                zap.setPrecio(rs.getInt("precio"));
+                zap.setTalla(rs.getInt("talla"));
+                zap.setSucursal(rs.getString("sucursal"));
+                list.add(zap);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      return list;
+    }
+    
+    @Override
+    public Zapato listZapato(int id){
+        String sql="select * from zapatos where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            rs=ps.executeQuery();
+            while(rs.next()){
+                z.setId(rs.getInt("id"));
+                z.setModelo(rs.getString("modelo"));
+                z.setPrecio(rs.getInt("precio"));
+                z.setTalla(rs.getInt("talla"));
+                z.setSucursal(rs.getString("sucursal"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+      return z;
+    }
+    
+    @Override
+    public boolean addZapato(Zapato zap){
+        String sql="insert into zapatos (modelo, talla, precio, sucursal) values ('"+zap.getModelo()+"','"+zap.getTalla()+"','"+zap.getPrecio()+"','"+zap.getSucursal()+"')";
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+       return false;
+    }
+    
+    @Override
+    public boolean editZapato(Zapato zap){
+        String sql="update zapatos set modelo='"+zap.getModelo()+"', talla='"+zap.getTalla()+"', precio='"+zap.getPrecio()+ "', sucursal='" + zap.getSucursal() + "' where id="+zap.getId();
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+        }
+        return false;
+    }
+    
+    @Override
+    public boolean deleteZapato(int id){
+        String sql="delete from zapatos where id="+id;
+        try {
+            con=cn.getConnection();
+            ps=con.prepareStatement(sql);
+            ps.executeUpdate();
+        } catch (Exception e) {
+        }
+       
+       return false;
+    }
 }
